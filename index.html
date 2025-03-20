@@ -31,6 +31,14 @@
       background-color: #555;
     }
   </style>
+  <!-- Import map to resolve the '@azure/msal-browser' module -->
+  <script type="importmap">
+  {
+    "imports": {
+      "@azure/msal-browser": "https://cdn.jsdelivr.net/npm/@azure/msal-browser@2.34.0/dist/msal-browser.esm.min.js"
+    }
+  }
+  </script>
 </head>
 <body>
   <h1>Welcome to CS Exam Game</h1>
