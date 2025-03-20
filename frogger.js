@@ -61,7 +61,7 @@ function keyPressed() {
 }
 
 function keyReleased() {
-  if (keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW || keyCode === UP_ARROW || DOWN_ARROW) {
+  if (keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW || keyCode === UP_ARROW || keyCode === DOWN_ARROW) {
     frog.setDir(0, 0);
   }
 }
@@ -94,7 +94,14 @@ function checkSuccess() {
 
 function gameOver() {
   noLoop();
-  let playerName = prompt(`Game Over!\nScore = ${score}\nEnter your name:`).trim();
+  // Instead of prompting, get the player's name from the "user-info" element.
+  let userInfoEl = document.getElementById("user-info");
+  let playerName = userInfoEl ? userInfoEl.innerText.trim() : "";
+  // Optionally remove "Hello, " prefix if present.
+  if (playerName.startsWith("Hello,")) {
+    playerName = playerName.replace("Hello, ", "");
+  }
+  
   if (playerName) {
     // Submit the score to the database.
     fetch(`${API_BASE}/api/score`, {
@@ -121,7 +128,7 @@ function gameOver() {
       alert("Score submission failed: " + error.message);
     });
   } else {
-    alert("No name entered, score not submitted.");
+    alert("No user info available; score not submitted.");
   }
 }
 
