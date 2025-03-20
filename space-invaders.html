@@ -18,9 +18,19 @@
     .home-link:hover {
       text-decoration: underline;
     }
+    /* Style for displaying logged-in user info */
+    #user-info {
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 20px;
+      color: #0078d4;
+    }
   </style>
 </head>
 <body>
+  <!-- Display the logged-in user's name (populated by auth.js) -->
+  <div id="user-info"></div>
+  
   <div class="game-container">
     <img src="https://redoakroller.s3-eu-west-1.amazonaws.com/category/Shenfield-High-School.jpg" alt="School Logo" class="school-logo">
     <h1>Space Invaders Redux</h1>

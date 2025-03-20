@@ -158,7 +158,19 @@ function checkPlayerHit() {
 
 function gameOver() {
     noLoop();
-    let playerName = prompt(`Game Over!\nScore = ${score}\nEnter your name:`).trim();
+    // Retrieve the player's name from the "user-info" element or localStorage.
+    let userInfoEl = document.getElementById("user-info");
+    let playerName = "";
+    if (userInfoEl) {
+      playerName = userInfoEl.innerText.trim();
+    }
+    if (playerName.startsWith("Hello,")) {
+      playerName = playerName.replace("Hello, ", "");
+    }
+    if (!playerName) {
+      playerName = localStorage.getItem("msal_userName") || "";
+    }
+    
     if (playerName) {
       // Submit the score to the database.
       fetch(`${API_BASE}/api/score`, {
@@ -172,7 +184,6 @@ function gameOver() {
       })
       .then(response => {
         if (!response.ok) {
-          // If the response is not OK, extract the error message.
           return response.json().then(err => { throw new Error(err.error || "Unknown error"); });
         }
         return response.json();
@@ -185,7 +196,7 @@ function gameOver() {
         alert("Score submission failed: " + error.message);
       });
     } else {
-      alert("No name entered, score not submitted.");
+      alert("No user info available; score not submitted.");
     }
 }
 
