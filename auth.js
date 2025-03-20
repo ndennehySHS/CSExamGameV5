@@ -5,8 +5,8 @@ import { PublicClientApplication } from '@azure/msal-browser';
 const msalConfig = {
     auth: {
         clientId: "8794ae66-81d9-4b1d-8dd5-b146c546dea2", // Replace with your Application (client) ID from Entra ID
-        authority: "https://login.microsoftonline.com/common", // This supports multiple account types
-        redirectUri: window.location.origin // Redirect back to the current site
+        authority: "https://login.microsoftonline.com/737b9d9f-9b7b-4dd2-b7d3-aef85aef5565", // This supports multiple account types
+        redirectUri: window.location.origin // Redirect back to the current site //"https://supreme-space-dollop-5g5q7j7vj9w5fvvp-5500.app.github.dev" //
     },
     cache: {
         cacheLocation: "sessionStorage", // Options: "localStorage" or "sessionStorage"
