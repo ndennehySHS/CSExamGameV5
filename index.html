@@ -34,10 +34,16 @@
 </head>
 <body>
   <h1>Welcome to CS Exam Game</h1>
+  <button id="ms-login-btn">Sign in with Microsoft</button>
   <nav>
     <a href="leaderboard.html">Leaderboard</a>
     <a href="space-invaders.html">Space Invaders</a>
     <a href="frogger.html">Frogger</a>
   </nav>
+  <script type="module">
+    import { login } from './auth.js';
+    // Attach the login function to the button
+    document.getElementById("ms-login-btn").addEventListener("click", login);
+  </script>
 </body>
 </html>
