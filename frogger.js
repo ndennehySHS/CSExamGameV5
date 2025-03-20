@@ -9,6 +9,15 @@ let portal;
 // Set API_BASE to the absolute URL if needed, or leave as an empty string for relative paths.
 const API_BASE = ''; 
 
+// On page load, update the "user-info" element from localStorage if available.
+window.addEventListener("DOMContentLoaded", () => {
+  const userInfoEl = document.getElementById("user-info");
+  const storedName = localStorage.getItem("msal_userName");
+  if (userInfoEl && storedName) {
+    userInfoEl.innerText = `Hello, ${storedName}`;
+  }
+});
+
 function setup() {
   let canvas = createCanvas(800, 600);
   canvas.parent('gameCanvas');
@@ -94,12 +103,17 @@ function checkSuccess() {
 
 function gameOver() {
   noLoop();
-  // Instead of prompting, get the player's name from the "user-info" element.
+  // Retrieve player name from "user-info" element; if not found, fallback to localStorage.
   let userInfoEl = document.getElementById("user-info");
-  let playerName = userInfoEl ? userInfoEl.innerText.trim() : "";
-  // Optionally remove "Hello, " prefix if present.
+  let playerName = "";
+  if (userInfoEl) {
+      playerName = userInfoEl.innerText.trim();
+  }
   if (playerName.startsWith("Hello,")) {
     playerName = playerName.replace("Hello, ", "");
+  }
+  if (!playerName) {
+    playerName = localStorage.getItem("msal_userName") || "";
   }
   
   if (playerName) {
@@ -115,7 +129,6 @@ function gameOver() {
     })
     .then(response => {
       if (!response.ok) {
-        // If the response is not OK, extract the error message.
         return response.json().then(err => { throw new Error(err.error || "Unknown error"); });
       }
       return response.json();
@@ -151,8 +164,8 @@ class Frog {
   }
 
   move() {
-    this.x += this.xdir * 20; // Reduced movement distance
-    this.y += this.ydir * 20; // Reduced movement distance
+    this.x += this.xdir * 20;
+    this.y += this.ydir * 20;
     this.x = constrain(this.x, 0, width - 40);
     this.y = constrain(this.y, 0, height - 40);
   }
