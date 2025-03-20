@@ -30,6 +30,12 @@
     nav a:hover {
       background-color: #555;
     }
+    /* Optional: style for the user info element */
+    #user-info {
+      margin-top: 20px;
+      font-size: 20px;
+      color: #0078d4; /* A blue color for example */
+    }
   </style>
   <!-- Import map to resolve '@azure/msal-browser' using esm.sh -->
   <script type="importmap">
@@ -43,6 +49,8 @@
 <body>
   <h1>Welcome to CS Exam Game</h1>
   <button id="ms-login-btn">Sign in with Microsoft</button>
+  <!-- Element for displaying logged in user info -->
+  <div id="user-info"></div>
   <nav>
     <a href="leaderboard.html">Leaderboard</a>
     <a href="space-invaders.html">Space Invaders</a>
